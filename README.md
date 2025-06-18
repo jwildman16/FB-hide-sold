@@ -37,6 +37,8 @@ Both bookmarklets feature:
 4.  Copy the entire code for the desired bookmarklet (from the files below) and paste it into the **URL / Address** field of the bookmark.
 5.  Save the bookmark.
 
+These have been tested and confirmed working in Chrome. 
+
 ## Bookmarklet Code
 
 ### Hide SOLD Items (v14)
@@ -46,6 +48,7 @@ This hides listings marked as `(SOLD)`.
 ```javascript
 javascript:(function(){if(window.soldHiderActive){return}window.soldHiderActive=!0;let e=0;const t=new Set;let i=null,o=null,n=null;function s(s,l){if("activation"===l){if(i)return;i=document.createElement("div"),i.style.cssText="position:fixed; top: 20px; left:50%;transform:translateX(-50%);padding:16px 24px;background-color:#15803d;color:white;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:999999;font-family:sans-serif;font-size:16px;transition:all 0.5s ease;",i.textContent=s,document.body.appendChild(i),setTimeout(()=>{document.body.contains(i)&&document.body.removeChild(i),i=null,r()},3500)}else if("counter"===l){if(!o)o=document.createElement("div"),o.style.cssText="position:fixed; left:50%;transform:translateX(-50%);padding:16px 24px;background-color:#15803d;color:white;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:999998;font-family:sans-serif;font-size:16px;transition:all 0.5s ease;",document.body.appendChild(o),r();o.textContent=s,o.style.opacity="1",clearTimeout(n),n=setTimeout(()=>{o&&(o.style.opacity="0")},4e3)}}function r(){if(!o)return;let e=i?i.offsetHeight+30:20;o.style.top=`${e}px`}function l(e){let i=0;const o=e.matches('div[role="feed"] > div')?[e]:Array.from(e.querySelectorAll('div[role="feed"] > div'));return o.forEach(e=>{if(!t.has(e)){const o=e.textContent;o&&o.includes("(SOLD)")&&(e.style.display="none",i++),t.add(e)}}),i}const c=new MutationObserver(t=>{let i=0;t.forEach(t=>{t.addedNodes.forEach(t=>{1===t.nodeType&&(i+=l(t))})}),i>0&&(e+=i,s(`Hid sold item (${e} total listings hidden)`,"counter"))});(function(){e+=l(document.body)})(),s(`Now actively hiding sold listings! ${e} listings hidden. (v14)`,"activation"),c.observe(document.body,{childList:!0,subtree:!0})})();
 ```
+<a href="bookmarklets/hide-sold.js" target="_blank">View the Hide Sold Items js file</a>. 
 
 ### Show Only SOLD Items (v6)
 
@@ -54,6 +57,7 @@ This hides all available listings, showing only those marked `(SOLD)`.
 ```javascript
 javascript:(function(){if(window.availableHiderActive){return}window.availableHiderActive=!0;let e=0;const t=new Set;let i=null,o=null,n=null;function s(s,l){if("activation"===l){if(i)return;i=document.createElement("div"),i.style.cssText="position:fixed; top: 20px; left:50%;transform:translateX(-50%);padding:16px 24px;background-color:#a16207;color:white;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:999999;font-family:sans-serif;font-size:16px;transition:all 0.5s ease;",i.textContent=s,document.body.appendChild(i),setTimeout(()=>{document.body.contains(i)&&document.body.removeChild(i),i=null,r()},3500)}else if("counter"===l){if(!o)o=document.createElement("div"),o.style.cssText="position:fixed; left:50%;transform:translateX(-50%);padding:16px 24px;background-color:#a16207;color:white;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:999998;font-family:sans-serif;font-size:16px;transition:all 0.5s ease;",document.body.appendChild(o),r();o.textContent=s,o.style.opacity="1",clearTimeout(n),n=setTimeout(()=>{o&&(o.style.opacity="0")},4e3)}}function r(){if(!o)return;let e=i?i.offsetHeight+30:20;o.style.top=`${e}px`}function l(e){let i=0;const o=e.matches('div[role="feed"] > div')?[e]:Array.from(e.querySelectorAll('div[role="feed"] > div'));return o.forEach(e=>{if(!t.has(e)){const o=e.textContent;o&&!o.includes("(SOLD)")&&(e.style.display="none",i++),t.add(e)}}),i}const c=new MutationObserver(t=>{let i=0;t.forEach(t=>{t.addedNodes.forEach(t=>{1===t.nodeType&&(i+=l(t))})}),i>0&&(e+=i,s(`Hid available item (${e} total listings hidden)`,"counter"))});(function(){e+=l(document.body)})(),s(`Now actively hiding available listings! ${e} listings hidden. (v6)`,"activation"),c.observe(document.body,{childList:!0,subtree:!0})})();
 ```
+<a href="bookmarklets/show-only-sold.js" target="_blank">View the Show Only Sold Items js file</a>. 
 
 ## Screenshots
 
